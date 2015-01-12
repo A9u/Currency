@@ -14,15 +14,34 @@ public class CurrencyFinder {
     }
 
     public static void main(String[] args) {
-        CurrencyFinder currencyFinder = new CurrencyFinder();
-        Scanner sc = new Scanner(System.in);
-        String country = sc.next();
-        for (int i = 0; i < 3; i++) {
+        try {
+            int i;
+            CurrencyFinder currencyFinder = new CurrencyFinder();
+            Scanner sc = new Scanner(System.in);
+            String country = sc.next();
+            Currency currency= getCurrency(currencyFinder, country);
+            printCurrency(currency);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private static Currency getCurrency(CurrencyFinder currencyFinder, String country) {
+        int i;
+       // Currency currency=null;
+        for (i = 0; i < 3; i++) {
             if (currencyFinder.countries[i].getCountry().equalsIgnoreCase(country)) {
-                Currency currency = currencyFinder.countries[i].getCurrency();
-                System.out.println("Currency name : " + currency.getCurrency());
-                break;
+                return currencyFinder.countries[i].getCurrency();
+
             }
+        }
+        return null;
+    }
+    private static void printCurrency(Currency currency) {
+
+        if (currency != null) {
+            System.out.println("Currency name : " + currency.getCurrency());
         }
     }
 
